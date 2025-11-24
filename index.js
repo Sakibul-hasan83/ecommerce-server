@@ -34,7 +34,7 @@ async function run() {
    
 
 
-
+// user save in database 
     app.post('/users', async (req, res) => {
       const user = req.body;
       const result = await userCollections.insertOne(user);
@@ -57,11 +57,12 @@ async function run() {
 
 
 
-
+// create jwt 
     app.post('/jwt', async (req, res) => {
       const user = req.body;
       const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1h" });
-
+      
+// send token to cookie 
       res.cookie("token", token, {
         httpOnly: true,
         secure: false, // for localhost
